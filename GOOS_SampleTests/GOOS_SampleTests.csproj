@@ -130,6 +130,7 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="features\" />
+    <Folder Include="PageObjects\" />
     <Folder Include="steps\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
