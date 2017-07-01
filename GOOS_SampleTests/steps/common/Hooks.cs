@@ -23,29 +23,38 @@ namespace GOOS_SampleTests.steps.common
 
 
         [BeforeScenario()]
-        public void CleanTable()
+        public void BeforeScenario()
         {
-            var tags = ScenarioContext.Current.ScenarioInfo.Tags
-                .Where(x => x.StartsWith("Clean"))
-                .Select(x => x.Replace("Clean", ""));
-            if (!tags.Any())
-            {
-                return;
-            }
-            using (var dbcontext = new NorthwindEntities())
-            {
-                foreach (var tag in tags)
-                {
-                    dbcontext.Database.ExecuteSqlCommand("TRUNCATE TABLE [" + tag + "]");
-                }
-                dbcontext.SaveChangesAsync();
-            }
+             CleanTableByTags();
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            //TODO: implement logic that has to run after executing each scenario
+            CleanTableByTags();
+        }
+
+        
+  private static void CleanTableByTags()
+        {
+            var tags = ScenarioContext.Current.ScenarioInfo.Tags
+                .Where(x => x.StartsWith("Clean"))
+                .Select(x => x.Replace("Clean", ""));
+
+            if (!tags.Any())
+            {
+                return;
+            }
+
+            using (var dbcontext = new NorthwindEntities())
+            {
+                foreach (var tag in tags)
+                {
+                    dbcontext.Database.ExecuteSqlCommand("TRUNCATE TABLE ["+tag+"]");
+                }
+
+                dbcontext.SaveChangesAsync();
+            }
         }
     }
 }
