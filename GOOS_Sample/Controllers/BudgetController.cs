@@ -16,6 +16,7 @@ namespace GOOS_Sample.Controllers
 
         public BudgetController()
         {
+            this.budgetServiceStub = new BudgetService();
         }
 
         public BudgetController(IBudgetService budgetServiceStub)
@@ -30,15 +31,22 @@ namespace GOOS_Sample.Controllers
         [HttpPost]
         public ActionResult Add(BudgetAddViewModel model)
         {
+            this.budgetServiceStub.Create(model);
+            ViewBag.Message = "added successfully";
+            return View(model);
+        }
+    }
 
+    public class BudgetService : IBudgetService
+    {
+        public void Create(BudgetAddViewModel model)
+        {
             using (var dbcontext = new NorthwindEntities())
             {
                 var budget = new Budget() { Amount = model.Amount, YearMonth = model.Month };
                 dbcontext.Budgets.Add(budget);
                 dbcontext.SaveChanges();
             }
-            ViewBag.Message = "added successfully";
-            return View(model);
         }
     }
 }
