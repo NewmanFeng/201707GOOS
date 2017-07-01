@@ -113,6 +113,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="features\BudgetController.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BudgetController.feature</DependentUpon>
+    </Compile>
     <Compile Include="features\BudgetCreate.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -120,6 +125,7 @@
     </Compile>
     <Compile Include="PageObjects\BudgeCreatePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="steps\BudgetControllerSteps.cs" />
     <Compile Include="steps\BudgetCreateSteps.cs" />
     <Compile Include="steps\common\Hooks.cs" />
   </ItemGroup>
@@ -127,6 +133,10 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="features\BudgetController.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BudgetController.feature.cs</LastGenOutput>
+    </None>
     <None Include="features\BudgetCreate.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>BudgetCreate.feature.cs</LastGenOutput>
